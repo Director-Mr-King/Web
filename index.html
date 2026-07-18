@@ -76,6 +76,8 @@
                 <img src="Mr. King.PNG" onerror="this.src='https://placehold.co/800x600/0f172a/d4af37?text=Mr.+King+Portrait'" class="h-full w-auto object-contain">
             </div>
             <p class="text-lg leading-relaxed text-slate-300">Mr. King is a multifaceted musical professional dedicated to the art of performance, education, and creative production. As a skilled Music Director, Composer, and Songwriter, he brings a wealth of expertise to every project, seamlessly blending technical proficiency with artistic passion. With a deep commitment to excellence, Mr. King serves as a Teacher and Instructor, mentoring the next generation of musicians while providing expert Choir Leadership and choral direction. Beyond his creative output, he is a sought-after Music Event Consultant and Coordinator, known for his ability to manage complex productions and bring cohesive musical visions to life.</p>
+            
+            <p class="text-sm italic text-gold-text text-center">Click to watch an original piece of piano recording of Mr. King</p>
             <div class="aspect-video bg-black rounded-xl overflow-hidden border border-slate-700 shadow-lg">
                 <video controls class="w-full h-full object-cover">
                     <source src="performance.mp4" type="video/mp4">
@@ -150,25 +152,50 @@
         function generatePDF() {
             const { jsPDF } = window.jspdf;
             const doc = new jsPDF();
-            const name = document.getElementById('fName').value || "N/A";
-            const email = document.getElementById('fEmail').value || "N/A";
-            const service = document.getElementById('fService').value;
-            const place = document.getElementById('fPlace').value || "N/A";
-            const address = document.getElementById('fAddress').value || "N/A";
-            const date = document.getElementById('fDate').value || "N/A";
-            const details = document.getElementById('fDetails').value || "N/A";
+            
+            // Professional layout styling
+            doc.setDrawColor(212, 175, 55);
+            doc.setLineWidth(1.5);
+            doc.rect(10, 10, 190, 277);
 
-            doc.setFontSize(18);
-            doc.text("Mr. King's Booking Form", 20, 20);
+            doc.setFont("helvetica", "bold");
+            doc.setFontSize(22);
+            doc.setTextColor(212, 175, 55);
+            doc.text("Mr. King's Booking Form", 105, 30, { align: "center" });
+
+            doc.setLineWidth(0.5);
+            doc.line(30, 35, 180, 35);
+
             doc.setFontSize(12);
-            doc.text("Client Name: " + name, 20, 40);
-            doc.text("Email: " + email, 20, 50);
-            doc.text("Service: " + service, 20, 60);
-            doc.text("Venue: " + place, 20, 70);
-            doc.text("Address: " + address, 20, 80);
-            doc.text("Date: " + date, 20, 90);
-            doc.text("Details: " + details, 20, 100);
-            doc.save("Booking_" + name.replace(/\s+/g, '_') + ".pdf");
+            doc.setTextColor(0, 0, 0);
+            doc.setFont("helvetica", "normal");
+
+            const fields = [
+                { label: "Client Name:", value: document.getElementById('fName').value },
+                { label: "Email:", value: document.getElementById('fEmail').value },
+                { label: "Service:", value: document.getElementById('fService').value },
+                { label: "Venue:", value: document.getElementById('fPlace').value },
+                { label: "Address:", value: document.getElementById('fAddress').value },
+                { label: "Date:", value: document.getElementById('fDate').value }
+            ];
+
+            let y = 50;
+            fields.forEach(f => {
+                doc.setFont("helvetica", "bold");
+                doc.text(f.label, 20, y);
+                doc.setFont("helvetica", "normal");
+                doc.text(f.value || "N/A", 60, y);
+                y += 15;
+            });
+
+            doc.setFont("helvetica", "bold");
+            doc.text("Details:", 20, y);
+            doc.setFont("helvetica", "normal");
+            const details = document.getElementById('fDetails').value || "None provided.";
+            const splitDetails = doc.splitTextToSize(details, 150);
+            doc.text(splitDetails, 20, y + 10);
+
+            doc.save("Booking_" + (document.getElementById('fName').value || "Client").replace(/\s+/g, '_') + ".pdf");
         }
     </script>
 </body>
