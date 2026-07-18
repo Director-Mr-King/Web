@@ -99,7 +99,7 @@
                     </div>
                     <div class="bg-slate-800 p-4 rounded-xl border border-gold-text/50">
                         <h4 class="text-gold-text font-bold uppercase text-xs mb-2">Full Package</h4>
-                        <p class="text-xs">Comprehensive solution</p>
+                        <p class="text-xs">All standard services combined into one complete event experience.</p>
                         <p class="text-xl font-bold mt-2">ECD$ 700</p>
                     </div>
                     <div class="md:col-span-2 bg-slate-800 p-4 rounded-xl border border-indigo-500/50">
@@ -127,7 +127,7 @@
                 <input id="fDate" type="date" class="w-full p-3 bg-slate-800 rounded border border-slate-700 focus:border-gold-text outline-none text-white">
                 <textarea id="fDetails" placeholder="Event Details / Requirements" class="w-full p-3 bg-slate-800 rounded border border-slate-700 h-24 focus:border-gold-text outline-none text-white"></textarea>
                 
-                <p class="text-sm text-yellow-500 font-semibold text-center mt-4">After downloading the form, please attach it to an email and send it to musicdirector.mr.king@gmail.com</p>
+                <p class="text-sm text-yellow-500 font-semibold text-center mt-4">Instructions: Fill out the form above, click "Download Booking Form" to save your details as a PDF, then attach the PDF to your email and send it to musicdirector.mr.king@gmail.com</p>
 
                 <button type="button" onclick="generatePDF()" class="w-full bg-yellow-600 hover:bg-yellow-500 text-white p-4 rounded font-bold transition">
                     Download Booking Form
@@ -159,7 +159,7 @@
             const details = document.getElementById('fDetails').value || "N/A";
 
             doc.setFontSize(18);
-            doc.text("Mr. King Booking Form", 20, 20);
+            doc.text("Mr. King's Booking Form", 20, 20);
             doc.setFontSize(12);
             doc.text("Client Name: " + name, 20, 40);
             doc.text("Email: " + email, 20, 50);
